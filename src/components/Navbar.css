@@ -1,0 +1,17 @@
+.navbar {
+  background-color: rgb(245 245 245 / 91%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+}
+
+.navbar h1 {
+  font-family: monospace;
+}
+
+.navbar__form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
