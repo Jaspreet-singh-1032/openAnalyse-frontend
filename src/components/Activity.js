@@ -11,6 +11,25 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+import Box from "@mui/material/Box";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { FixedSizeList } from "react-window";
+
+const renderRow = (props) => {
+  const { index, style } = props;
+
+  return (
+    <ListItem style={style} key={index} component="div" disablePadding>
+      <ListItemButton>
+        <ListItemText primary={`Python`} />
+        <ListItemText secondary={`1 hour`} />
+      </ListItemButton>
+    </ListItem>
+  );
+};
+
 function Activity() {
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
@@ -65,6 +84,24 @@ function Activity() {
 
       <div className="activity__todayActivities">
         <h3>Today's Activities</h3>
+        <Box
+          sx={{
+            width: "100%",
+            height: 200,
+            maxWidth: 360,
+            bgcolor: "background.paper",
+          }}
+        >
+          <FixedSizeList
+            height={200}
+            width="100%"
+            itemSize={46}
+            itemCount={20}
+            overscanCount={5}
+          >
+            {renderRow}
+          </FixedSizeList>
+        </Box>
       </div>
     </div>
   );

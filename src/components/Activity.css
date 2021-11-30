@@ -1,6 +1,14 @@
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 500px) {
+  /* for large screen */
   .activity__form {
     width: 30vw;
+  }
+  .activity {
+    display: flex;
+  }
+  .activity__todayActivities {
+    padding: 0px 0px 0px 40px !important;
+    width: 200px;
   }
 }
 
@@ -8,6 +16,7 @@
   padding: 20px;
   border: 1px solid lightgray;
   justify-content: center;
+  height: auto;
 }
 
 .activity__form {
