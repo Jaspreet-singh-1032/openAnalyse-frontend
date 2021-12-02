@@ -54,33 +54,36 @@ function Activity() {
 
   return (
     <div className="activity">
-      <form className="activity__form" onSubmit={handleSubmit}>
-        <FormControl sx={{ minWidth: 120 }} variant="standard">
-          <InputLabel id="demo-simple-select-standard-label">
-            Activity
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={activity}
-            onChange={handleChange}
-            label="Age"
-          >
-            <MenuItem value={10}>python</MenuItem>
-            <MenuItem value={20}>react</MenuItem>
-            <MenuItem value={30}>blogs read</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          id="timeSpent"
-          type="time"
-          value={timeSpent}
-          variant="filled"
-          helperText="Select time spent"
-          onChange={(e) => setTimeSpent(e.target.value)}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+      <div className="activity__activityManage">
+        <form className="activity__form" onSubmit={handleSubmit}>
+          <FormControl sx={{ minWidth: 120 }} variant="standard">
+            <InputLabel id="demo-simple-select-standard-label">
+              Activity
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={activity}
+              onChange={handleChange}
+              label="Age"
+            >
+              <MenuItem value={10}>python</MenuItem>
+              <MenuItem value={20}>react</MenuItem>
+              <MenuItem value={30}>blogs read</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            id="timeSpent"
+            type="time"
+            value={timeSpent}
+            variant="filled"
+            helperText="Select time spent"
+            onChange={(e) => setTimeSpent(e.target.value)}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+        <Button variant="text">Manage Activities</Button>
+      </div>
 
       <div className="activity__todayActivities">
         <h3>Today's Activities</h3>

@@ -33,3 +33,8 @@
 .activity__todayActivities {
   padding: 20px;
 }
+
+.activity__activityManage {
+  display: flex;
+  flex-direction: column;
+}
