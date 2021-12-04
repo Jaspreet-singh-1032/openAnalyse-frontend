@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // material ui imports
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+
+// components import
+import { GlobalContext } from "../GlobalState";
+import { setUser } from "../actions";
+import NavMenu from "./NavMenu";
+
+// api imports
+import { userLoginApi, userRegisterApi } from "../api/Auth";
 
 // css import
 import "./Navbar.css";
@@ -14,7 +22,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 350,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -22,6 +30,7 @@ const style = {
 };
 
 function Navbar() {
+  const { state, dispatch } = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,12 +40,22 @@ function Navbar() {
   const login = "login";
   const signup = "signup";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      console.log("handle login");
+      const response = await userLoginApi({ email, password });
+      if (response.status === 200) {
+        dispatch(setUser(response.data.user));
+        setPassword("");
+        setOpen(false);
+      }
     } else {
-      console.log("handle signup");
+      const response = await userRegisterApi({ email, password, username });
+      if (response.status === 201) {
+        dispatch(setUser(response.data.user));
+        setOpen(false);
+        setPassword("");
+      }
     }
   };
 
@@ -50,6 +69,7 @@ function Navbar() {
       setIsLogin(false);
     }
   };
+
   return (
     <div className="navbar">
       {/* Modal */}
@@ -100,10 +120,20 @@ function Navbar() {
       {/* ======================= End Modal ======================= */}
       <h1>openAnalyse</h1>
       <div className="navbar__loginContainer">
-        <Button onClick={() => openModal({ modalType: login })}>Login</Button>
-        <Button onClick={() => openModal({ modalType: signup })}>
-          Sign up
-        </Button>
+        {state.user.email === undefined ? (
+          <>
+            <Button onClick={() => openModal({ modalType: login })}>
+              Login
+            </Button>
+            <Button onClick={() => openModal({ modalType: signup })}>
+              Sign up
+            </Button>
+          </>
+        ) : (
+          <>
+            <NavMenu user={state.user} dispatch={dispatch} />
+          </>
+        )}
       </div>
     </div>
   );

@@ -17,6 +17,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 
+// components import
+import ManageActivityModal from "./ManageActivityModal";
+
 const renderRow = (props) => {
   const { index, style } = props;
 
@@ -33,6 +36,17 @@ const renderRow = (props) => {
 function Activity() {
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
+  const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
+  const [selectActivity, setSelectActivity] = useState([
+    {
+      id: 1,
+      name: "python",
+    },
+    {
+      id: 2,
+      name: "react",
+    },
+  ]);
 
   const [todayActivities, setTodayActivities] = useState([
     {
@@ -54,33 +68,50 @@ function Activity() {
 
   return (
     <div className="activity">
-      <form className="activity__form" onSubmit={handleSubmit}>
-        <FormControl sx={{ minWidth: 120 }} variant="standard">
-          <InputLabel id="demo-simple-select-standard-label">
-            Activity
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={activity}
-            onChange={handleChange}
-            label="Age"
-          >
-            <MenuItem value={10}>python</MenuItem>
-            <MenuItem value={20}>react</MenuItem>
-            <MenuItem value={30}>blogs read</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          id="timeSpent"
-          type="time"
-          value={timeSpent}
-          variant="filled"
-          helperText="Select time spent"
-          onChange={(e) => setTimeSpent(e.target.value)}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+      <ManageActivityModal
+        open={openActivityManageModal}
+        setOpen={setOpenActivityManageModal}
+      />
+      <div className="activity__activityManage">
+        <form className="activity__form" onSubmit={handleSubmit}>
+          <FormControl sx={{ minWidth: 120 }} variant="standard">
+            <InputLabel id="demo-simple-select-standard-label">
+              Activity
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={activity}
+              onChange={handleChange}
+              label="Age"
+            >
+              {selectActivity.map((item) => {
+                return (
+                  <MenuItem
+                    key={item.id}
+                    value={item.id}
+                    className="activity__selectItem"
+                  >
+                    {item.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <TextField
+            id="timeSpent"
+            type="time"
+            value={timeSpent}
+            variant="filled"
+            helperText="Select time spent"
+            onChange={(e) => setTimeSpent(e.target.value)}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+        <Button variant="text" onClick={() => setOpenActivityManageModal(true)}>
+          Manage Activities
+        </Button>
+      </div>
 
       <div className="activity__todayActivities">
         <h3>Today's Activities</h3>
