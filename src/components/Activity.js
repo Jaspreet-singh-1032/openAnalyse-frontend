@@ -17,8 +17,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-
 // components import
 import ManageActivityModal from "./ManageActivityModal";
 
