@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 
 // components import
 import { GlobalContext } from "../GlobalState";
-import { setUser } from "../actions";
+import { setUser, setMessage } from "../actions";
 import NavMenu from "./NavMenu";
 
 // api imports
@@ -46,16 +46,33 @@ function Navbar() {
       userLoginApi({ email, password }).then((response) => {
         if (response.status === 200) {
           dispatch(setUser(response.data.user));
+          dispatch(
+            setMessage({ text: response.data.detail, variant: "success" })
+          );
           setPassword("");
           setOpen(false);
+        } else {
+          dispatch(
+            setMessage({ text: response.data.detail, variant: "error" })
+          );
         }
       });
     } else {
       userRegisterApi({ email, password, username }).then((response) => {
         if (response.status === 201) {
           dispatch(setUser(response.data.user));
+          dispatch(
+            setMessage({ text: response.data.detail, variant: "success" })
+          );
           setOpen(false);
           setPassword("");
+        } else {
+          dispatch(
+            setMessage({
+              text: response.data.detail || response.data.email[0],
+              variant: "error",
+            })
+          );
         }
       });
     }

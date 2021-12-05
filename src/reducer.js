@@ -10,6 +10,10 @@ const reducer = (state = {}, action) => {
     localStorage.removeItem("token");
     return { ...state, user: {} };
   }
+
+  if (action.type === actions.setMessage) {
+    return { ...state, message: action.payload.data };
+  }
   return state;
 };
 

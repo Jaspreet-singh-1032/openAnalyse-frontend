@@ -3,6 +3,7 @@ import reducer from "./reducer";
 
 const initialState = {
   user: {},
+  message: {},
 };
 
 export const GlobalContext = createContext(initialState);
