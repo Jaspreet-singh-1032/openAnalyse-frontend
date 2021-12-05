@@ -40,22 +40,24 @@ function Navbar() {
   const login = "login";
   const signup = "signup";
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      const response = await userLoginApi({ email, password });
-      if (response.status === 200) {
-        dispatch(setUser(response.data.user));
-        setPassword("");
-        setOpen(false);
-      }
+      userLoginApi({ email, password }).then((response) => {
+        if (response.status === 200) {
+          dispatch(setUser(response.data.user));
+          setPassword("");
+          setOpen(false);
+        }
+      });
     } else {
-      const response = await userRegisterApi({ email, password, username });
-      if (response.status === 201) {
-        dispatch(setUser(response.data.user));
-        setOpen(false);
-        setPassword("");
-      }
+      userRegisterApi({ email, password, username }).then((response) => {
+        if (response.status === 201) {
+          dispatch(setUser(response.data.user));
+          setOpen(false);
+          setPassword("");
+        }
+      });
     }
   };
 
@@ -87,6 +89,7 @@ function Navbar() {
               label="Email"
               variant="standard"
               required
+              autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
