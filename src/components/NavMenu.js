@@ -10,7 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 
 // actions import
-import { userLogout } from "../actions";
+import { userLogout, setMessage } from "../actions";
 
 export default function NavMenu({ user, dispatch }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -18,6 +18,7 @@ export default function NavMenu({ user, dispatch }) {
 
   const handleLogout = () => {
     dispatch(userLogout());
+    dispatch(setMessage({ text: "Logout successfully", variant: "success" }));
   };
 
   const handleClick = (event) => {

@@ -10,3 +10,10 @@ export const setUser = (data = {}) => ({
 export const userLogout = () => ({
   type: actions.Logout,
 });
+
+export const setMessage = (data = {}) => ({
+  type: actions.setMessage,
+  payload: {
+    data: data,
+  },
+});
