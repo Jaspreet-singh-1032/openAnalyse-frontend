@@ -1,9 +1,8 @@
-import React, { useState, useContext, forwardRef, useEffect } from "react";
-import Button from "@mui/material/Button";
+import React, { useContext, forwardRef, useEffect } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { GlobalContext } from "../GlobalState";
-import { setUser, setMessage } from "../actions";
+import { setMessage } from "../actions";
 
 export default function MessageBar() {
   const { state, dispatch } = useContext(GlobalContext);

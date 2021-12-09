@@ -43,35 +43,26 @@ function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      userLoginApi({ email, password }).then((response) => {
+      userLoginApi(email, password).then((response) => {
         if (response.status === 200) {
           dispatch(setUser(response.data.user));
-          dispatch(
-            setMessage({ text: response.data.detail, variant: "success" })
-          );
+          dispatch(setMessage(response.data.detail, "success"));
           setPassword("");
           setOpen(false);
         } else {
-          dispatch(
-            setMessage({ text: response.data.detail, variant: "error" })
-          );
+          dispatch(setMessage(response.data.detail, "error"));
         }
       });
     } else {
-      userRegisterApi({ email, password, username }).then((response) => {
+      userRegisterApi(email, password, username).then((response) => {
         if (response.status === 201) {
           dispatch(setUser(response.data.user));
-          dispatch(
-            setMessage({ text: response.data.detail, variant: "success" })
-          );
+          dispatch(setMessage(response.data.detail, "success"));
           setOpen(false);
           setPassword("");
         } else {
           dispatch(
-            setMessage({
-              text: response.data.detail || response.data.email[0],
-              variant: "error",
-            })
+            setMessage(response.data.detail || response.data.email[0], "error")
           );
         }
       });

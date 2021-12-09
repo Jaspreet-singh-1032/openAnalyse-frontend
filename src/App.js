@@ -8,13 +8,19 @@ import Activity from "./components/Activity";
 import MessageBar from "./components/MessageBar";
 import { GlobalContext } from "./GlobalState";
 import { setUser } from "./actions";
+import { getUserApi } from "./api/Auth";
+
 function App() {
   const { dispatch } = useContext(GlobalContext);
+
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      dispatch(setUser(JSON.parse(user)));
-    }
+    const getUser = async () => {
+      const response = await getUserApi();
+      if (response.status === 200) {
+        dispatch(setUser(response.data));
+      }
+    };
+    getUser();
   }, [dispatch]);
   return (
     <div>

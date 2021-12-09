@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import "./ManageActivityModal.css";
+
+// actions import
+import { setMessage } from "../actions";
+
+import { GlobalContext } from "../GlobalState";
 
 // api imports
 import { postActivityType } from "../api/API";
@@ -20,13 +25,22 @@ const style = {
   p: 4,
 };
 
-function ManageActivityModal({ open, setOpen }) {
+function ManageActivityModal({ open, setOpen, setActivityTypes }) {
+  const { dispatch } = useContext(GlobalContext);
   const [name, setName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    postActivityType({ name }).then((response) => {
-      setName("");
-      console.log(response);
+    postActivityType(name).then((response) => {
+      if (response.status === 201) {
+        dispatch(setMessage("Saved successfully", "success"));
+        setActivityTypes((state) => {
+          return [...state, response.data];
+        });
+        setOpen(false);
+        setName("");
+      } else {
+        dispatch(setMessage(response.data.detail, "error"));
+      }
     });
   };
   return (
