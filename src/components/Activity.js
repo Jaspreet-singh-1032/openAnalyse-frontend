@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // css import
 import "./Activity.css";
@@ -19,6 +19,7 @@ import { FixedSizeList } from "react-window";
 
 // components import
 import ManageActivityModal from "./ManageActivityModal";
+import { getActivityTypes } from "../api/API";
 
 const renderRow = (props) => {
   const { index, style } = props;
@@ -37,16 +38,8 @@ function Activity() {
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
-  const [selectActivity, setSelectActivity] = useState([
-    {
-      id: 1,
-      name: "python",
-    },
-    {
-      id: 2,
-      name: "react",
-    },
-  ]);
+  const [selectActivity, setSelectActivity] = useState([]);
+  const [activityTypes, setActivityTypes] = useState([]);
 
   const [todayActivities, setTodayActivities] = useState([
     {
@@ -66,11 +59,20 @@ function Activity() {
     setActivity(event.target.value);
   };
 
+  useEffect(() => {
+    const fetchActivityTypes = async () => {
+      const response = await getActivityTypes();
+      setActivityTypes(response.data);
+    };
+    fetchActivityTypes();
+  }, []);
+
   return (
     <div className="activity">
       <ManageActivityModal
         open={openActivityManageModal}
         setOpen={setOpenActivityManageModal}
+        setActivityTypes={setActivityTypes}
       />
       <div className="activity__activityManage">
         <form className="activity__form" onSubmit={handleSubmit}>
@@ -85,7 +87,7 @@ function Activity() {
               onChange={handleChange}
               label="Age"
             >
-              {selectActivity.map((item) => {
+              {activityTypes.map((item) => {
                 return (
                   <MenuItem
                     key={item.id}

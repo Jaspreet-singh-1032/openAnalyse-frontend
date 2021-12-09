@@ -18,7 +18,7 @@ export default function NavMenu({ user, dispatch }) {
 
   const handleLogout = () => {
     dispatch(userLogout());
-    dispatch(setMessage({ text: "Logout successfully", variant: "success" }));
+    dispatch(setMessage("Logout successfully", "success"));
   };
 
   const handleClick = (event) => {

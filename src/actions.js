@@ -11,9 +11,9 @@ export const userLogout = () => ({
   type: actions.Logout,
 });
 
-export const setMessage = (data = {}) => ({
+export const setMessage = (text = "", variant = "") => ({
   type: actions.setMessage,
   payload: {
-    data: data,
+    data: { text, variant },
   },
 });
