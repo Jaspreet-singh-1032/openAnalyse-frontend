@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 // css import
 import "./Activity.css";
@@ -19,7 +19,7 @@ import { FixedSizeList } from "react-window";
 
 // components import
 import ManageActivityModal from "./ManageActivityModal";
-import { getActivityTypes } from "../api/API";
+import { GlobalContext } from "../GlobalState";
 
 const renderRow = (props) => {
   const { index, style } = props;
@@ -35,19 +35,11 @@ const renderRow = (props) => {
 };
 
 function Activity() {
+  const { fetchActivityTypes, state } = useContext(GlobalContext);
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
-  const [selectActivity, setSelectActivity] = useState([]);
-  const [activityTypes, setActivityTypes] = useState([]);
-
-  const [todayActivities, setTodayActivities] = useState([
-    {
-      id: 1,
-      name: "python",
-      timeSpent: 1,
-    },
-  ]);
+  // const [activityTypes, setActivityTypes] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,25 +52,21 @@ function Activity() {
   };
 
   useEffect(() => {
-    const fetchActivityTypes = async () => {
-      const response = await getActivityTypes();
-      setActivityTypes(response.data);
-    };
     fetchActivityTypes();
-  }, []);
+  }, [fetchActivityTypes]);
 
   return (
     <div className="activity">
       <ManageActivityModal
         open={openActivityManageModal}
         setOpen={setOpenActivityManageModal}
-        setActivityTypes={setActivityTypes}
+        // setActivityTypes={setActivityTypes}
       />
       <div className="activity__activityManage">
         <form className="activity__form" onSubmit={handleSubmit}>
           <FormControl sx={{ minWidth: 120 }} variant="standard">
             <InputLabel id="demo-simple-select-standard-label">
-              Activity
+              Select Activity
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -87,7 +75,7 @@ function Activity() {
               onChange={handleChange}
               label="Age"
             >
-              {activityTypes.map((item) => {
+              {state.activityTypes.map((item) => {
                 return (
                   <MenuItem
                     key={item.id}

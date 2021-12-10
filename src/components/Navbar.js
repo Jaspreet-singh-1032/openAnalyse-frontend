@@ -8,11 +8,7 @@ import TextField from "@mui/material/TextField";
 
 // components import
 import { GlobalContext } from "../GlobalState";
-import { setUser, setMessage } from "../actions";
 import NavMenu from "./NavMenu";
-
-// api imports
-import { userLoginApi, userRegisterApi } from "../api/Auth";
 
 // css import
 import "./Navbar.css";
@@ -30,7 +26,8 @@ const style = {
 };
 
 function Navbar() {
-  const { state, dispatch } = useContext(GlobalContext);
+  const { state, dispatch, userLogin, userRegister } =
+    useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,30 +40,11 @@ function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      userLoginApi(email, password).then((response) => {
-        if (response.status === 200) {
-          dispatch(setUser(response.data.user));
-          dispatch(setMessage(response.data.detail, "success"));
-          setPassword("");
-          setOpen(false);
-        } else {
-          dispatch(setMessage(response.data.detail, "error"));
-        }
-      });
+      userLogin(email, password, setOpen);
     } else {
-      userRegisterApi(email, password, username).then((response) => {
-        if (response.status === 201) {
-          dispatch(setUser(response.data.user));
-          dispatch(setMessage(response.data.detail, "success"));
-          setOpen(false);
-          setPassword("");
-        } else {
-          dispatch(
-            setMessage(response.data.detail || response.data.email[0], "error")
-          );
-        }
-      });
+      userRegister(email, password, username, setOpen);
     }
+    setPassword("");
   };
 
   const openModal = ({ modalType }) => {

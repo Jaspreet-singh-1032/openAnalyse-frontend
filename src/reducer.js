@@ -14,6 +14,20 @@ const reducer = (state = {}, action) => {
   if (action.type === actions.setMessage) {
     return { ...state, message: action.payload.data };
   }
+
+  if (action.type === actions.setActivityTypes) {
+    return {
+      ...state,
+      activityTypes: action.payload.data,
+    };
+  }
+
+  if (action.type === actions.addActivityType) {
+    return {
+      ...state,
+      activityTypes: [...state.activityTypes, action.payload.data],
+    };
+  }
   return state;
 };
 
