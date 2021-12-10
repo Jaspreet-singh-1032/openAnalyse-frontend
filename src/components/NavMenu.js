@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -10,15 +10,15 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 
 // actions import
-import { userLogout, setMessage } from "../actions";
+import { GlobalContext } from "../GlobalState";
 
 export default function NavMenu({ user, dispatch }) {
+  const { userLogout } = useContext(GlobalContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleLogout = () => {
-    dispatch(userLogout());
-    dispatch(setMessage("Logout successfully", "success"));
+    userLogout();
   };
 
   const handleClick = (event) => {
