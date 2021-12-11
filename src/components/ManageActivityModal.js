@@ -44,6 +44,7 @@ function ManageActivityModal({ open, setOpen, setActivityTypes }) {
               label="Add Activity Type"
               variant="standard"
               required
+              autoComplete="off"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
