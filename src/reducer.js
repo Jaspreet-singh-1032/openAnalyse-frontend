@@ -28,6 +28,21 @@ const reducer = (state = {}, action) => {
       activityTypes: [...state.activityTypes, action.payload.data],
     };
   }
+
+  if (action.type === actions.setActivities) {
+    return {
+      ...state,
+      activities: action.payload.data,
+    };
+  }
+
+  if (action.type === actions.addActivity) {
+    return {
+      ...state,
+      activities: [action.payload.data, ...state.activities],
+    };
+  }
+
   return state;
 };
 

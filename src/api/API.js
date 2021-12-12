@@ -16,3 +16,21 @@ export const getActivityTypes = async () => {
   );
   return response;
 };
+
+export const postAddActivity = async (activityTypeId, timeSpent) => {
+  const response = await post(
+    `${BASE_URL}/api/activities/activity-types/${activityTypeId}/add_activity/`,
+    { time_spent: timeSpent },
+    true
+  );
+  return response;
+};
+
+export const getActivitiesApi = async (created_gte = "", created_lte = "") => {
+  let filters = [`created__gte=${created_gte}`, `created__lte=${created_lte}`];
+  const response = await get(
+    `${BASE_URL}/api/activities/?${filters.join("&")}`,
+    true
+  );
+  return response;
+};

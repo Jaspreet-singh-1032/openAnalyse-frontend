@@ -7,19 +7,27 @@ import React, {
 
 import reducer from "./reducer";
 import { getUserApi, userLoginApi, userRegisterApi } from "./api/Auth";
-import { getActivityTypes, postActivityType } from "./api/API";
+import {
+  getActivityTypes,
+  postActivityType,
+  postAddActivity,
+  getActivitiesApi,
+} from "./api/API";
 import {
   setUser,
   setMessage,
   setActivityTypes,
   addActivityTypeAction,
   userLogoutAction,
+  setActivities,
+  addActivity,
 } from "./actions";
 
 const initialState = {
   user: {},
   message: {},
   activityTypes: [],
+  activities: [],
 };
 
 export const GlobalContext = createContext(initialState);
@@ -40,6 +48,7 @@ export const GlobalProvider = ({ children }) => {
       dispatch(setUser(response.data.user));
       dispatch(setMessage(response.data.detail, "success"));
       setOpen && setOpen(false);
+      fetchActivityTypes();
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }
@@ -61,6 +70,7 @@ export const GlobalProvider = ({ children }) => {
   const userLogout = () => {
     dispatch(userLogoutAction());
     dispatch(setMessage("Logout successfully", "success"));
+    dispatch(setActivityTypes([]));
   };
 
   const fetchActivityTypes = useCallback(async () => {
@@ -80,6 +90,32 @@ export const GlobalProvider = ({ children }) => {
       dispatch(setMessage(response.data.detail, "error"));
     }
   };
+  //
+  const saveActivity = async (activityTypeId, timeSpent) => {
+    let response = await postAddActivity(activityTypeId, timeSpent);
+    if (response.status === 201) {
+      dispatch(setMessage("Saved successfully", "success"));
+      dispatch(
+        addActivity(
+          response.data.id,
+          response.data.time_spent,
+          response.data.activity_type
+        )
+      );
+    } else {
+      dispatch(setMessage(response.data.detail, "error"));
+    }
+  };
+
+  const getActivities = useCallback(
+    async (created_gte = "", created_lte = "") => {
+      let response = await getActivitiesApi(created_gte, created_lte);
+      if (response.status === 200) {
+        dispatch(setActivities(response.data));
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     getUser();
@@ -95,6 +131,8 @@ export const GlobalProvider = ({ children }) => {
         userLogout,
         fetchActivityTypes,
         addActivityType,
+        saveActivity,
+        getActivities,
       }}
     >
       {children}

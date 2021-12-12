@@ -25,6 +25,7 @@ function ManageActivityModal({ open, setOpen, setActivityTypes }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addActivityType(name, setOpen);
+    setName("");
   };
   return (
     <div className="manageActivityForm">
@@ -44,6 +45,7 @@ function ManageActivityModal({ open, setOpen, setActivityTypes }) {
               label="Add Activity Type"
               variant="standard"
               required
+              autoComplete="off"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

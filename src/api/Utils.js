@@ -18,6 +18,7 @@ export const post = async (url, data = {}, authenticate = false) => {
     headers: { ...headers },
     body: JSON.stringify(data),
   }).then((response) => response);
+
   const content = await response.json();
   return { status: response.status, data: content };
 };
@@ -39,6 +40,7 @@ export const get = async (url, authenticate = false) => {
     method: "GET",
     headers: { ...headers },
   }).then((response) => response);
+
   const content = await response.json();
   return { status: response.status, data: content };
 };
