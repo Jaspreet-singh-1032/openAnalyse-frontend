@@ -7,7 +7,7 @@ import React, {
 
 import reducer from "./reducer";
 import { getUserApi, userLoginApi, userRegisterApi } from "./api/Auth";
-import { getActivityTypes, postActivityType } from "./api/API";
+import { getActivityTypes, postActivityType, postAddActivity } from "./api/API";
 import {
   setUser,
   setMessage,
@@ -40,6 +40,7 @@ export const GlobalProvider = ({ children }) => {
       dispatch(setUser(response.data.user));
       dispatch(setMessage(response.data.detail, "success"));
       setOpen && setOpen(false);
+      fetchActivityTypes();
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }
@@ -61,6 +62,7 @@ export const GlobalProvider = ({ children }) => {
   const userLogout = () => {
     dispatch(userLogoutAction());
     dispatch(setMessage("Logout successfully", "success"));
+    dispatch(setActivityTypes([]));
   };
 
   const fetchActivityTypes = useCallback(async () => {
@@ -81,6 +83,15 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const saveActivity = async (activityTypeId, timeSpent) => {
+    let response = await postAddActivity(activityTypeId, timeSpent);
+    if (response.status === 201) {
+      dispatch(setMessage("Saved successfully", "success"));
+    } else {
+      dispatch(setMessage(response.data.detail, "error"));
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -95,6 +106,7 @@ export const GlobalProvider = ({ children }) => {
         userLogout,
         fetchActivityTypes,
         addActivityType,
+        saveActivity,
       }}
     >
       {children}

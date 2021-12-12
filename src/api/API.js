@@ -16,3 +16,12 @@ export const getActivityTypes = async () => {
   );
   return response;
 };
+
+export const postAddActivity = async (activityTypeId, timeSpent) => {
+  const response = await post(
+    `${BASE_URL}/api/activities/activity-types/${activityTypeId}/add_activity/`,
+    { time_spent: timeSpent },
+    true
+  );
+  return response;
+};

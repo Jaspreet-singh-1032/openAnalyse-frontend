@@ -35,7 +35,7 @@ const renderRow = (props) => {
 };
 
 function Activity() {
-  const { fetchActivityTypes, state } = useContext(GlobalContext);
+  const { fetchActivityTypes, state, saveActivity } = useContext(GlobalContext);
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
@@ -45,6 +45,7 @@ function Activity() {
     e.preventDefault();
     console.log(activity);
     console.log(timeSpent);
+    saveActivity(activity, timeSpent);
   };
 
   const handleChange = (event) => {
@@ -92,6 +93,7 @@ function Activity() {
             id="timeSpent"
             type="time"
             value={timeSpent}
+            required
             variant="filled"
             helperText="Select time spent"
             onChange={(e) => setTimeSpent(e.target.value)}
