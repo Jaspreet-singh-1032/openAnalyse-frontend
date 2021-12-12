@@ -31,3 +31,17 @@ export const addActivityTypeAction = (id, name) => ({
     data: { id, name },
   },
 });
+
+export const setActivities = (activities = []) => ({
+  type: actions.setActivities,
+  payload: {
+    data: activities,
+  },
+});
+
+export const addActivity = (id, time_spent, activity_type) => ({
+  type: actions.addActivity,
+  payload: {
+    data: { id, time_spent, activity_type },
+  },
+});

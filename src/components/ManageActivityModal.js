@@ -25,6 +25,7 @@ function ManageActivityModal({ open, setOpen, setActivityTypes }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addActivityType(name, setOpen);
+    setName("");
   };
   return (
     <div className="manageActivityForm">

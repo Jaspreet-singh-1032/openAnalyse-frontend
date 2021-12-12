@@ -22,20 +22,21 @@ import ManageActivityModal from "./ManageActivityModal";
 import { GlobalContext } from "../GlobalState";
 
 const renderRow = (props) => {
-  const { index, style } = props;
+  const { index, style, data } = props;
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
-        <ListItemText primary={`Python`} />
-        <ListItemText secondary={`1 hour`} />
+        <ListItemText primary={data[index].activity_type} />
+        <ListItemText secondary={data[index].time_spent} />
       </ListItemButton>
     </ListItem>
   );
 };
 
 function Activity() {
-  const { fetchActivityTypes, state, saveActivity } = useContext(GlobalContext);
+  const { fetchActivityTypes, state, saveActivity, getActivities } =
+    useContext(GlobalContext);
   const [activity, setActivity] = useState("");
   const [timeSpent, setTimeSpent] = useState(0);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
@@ -43,8 +44,6 @@ function Activity() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(activity);
-    console.log(timeSpent);
     saveActivity(activity, timeSpent);
   };
 
@@ -54,7 +53,10 @@ function Activity() {
 
   useEffect(() => {
     fetchActivityTypes();
-  }, [fetchActivityTypes]);
+    let created_gte = new Date();
+    created_gte.setHours(0, 0, 0, 0);
+    getActivities(created_gte.toJSON());
+  }, [fetchActivityTypes, getActivities]);
 
   return (
     <div className="activity">
@@ -119,8 +121,9 @@ function Activity() {
             height={200}
             width="100%"
             itemSize={46}
-            itemCount={20}
+            itemCount={state.activities.length}
             overscanCount={5}
+            itemData={state.activities}
           >
             {renderRow}
           </FixedSizeList>
