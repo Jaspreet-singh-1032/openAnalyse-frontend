@@ -20,7 +20,7 @@ function Visualize() {
           datasets: [
             {
               label: "Time invested",
-              data: response.map((item) => item.total_time_spent),
+              data: response.map((item) => item.total_time_spent / 60 / 60),
               backgroundColor: response.map(
                 () => "#" + Math.random().toString(16).substr(-6)
               ),
