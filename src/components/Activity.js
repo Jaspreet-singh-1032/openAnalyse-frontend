@@ -23,12 +23,17 @@ import { GlobalContext } from "../GlobalState";
 
 const renderRow = (props) => {
   const { index, style, data } = props;
+  let time = data[index].time_spent;
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
         <ListItemText primary={data[index].activity_type} />
-        <ListItemText secondary={data[index].time_spent} />
+        <ListItemText
+          secondary={
+            time / 60 / 60 >= 1 ? `${time / 60 / 60} Hrs` : `${time / 60} mins`
+          }
+        />
       </ListItemButton>
     </ListItem>
   );
@@ -44,7 +49,9 @@ function Activity() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveActivity(activity, timeSpent);
+    let time = timeSpent.split(":");
+    let toSeconds = time[0] * 60 * 60 + time[1] * 60;
+    saveActivity(activity, toSeconds);
   };
 
   const handleChange = (event) => {
