@@ -1,61 +1,46 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import PieChartExtended from "../charts/PieChartExtended";
 import { GlobalContext } from "../GlobalState";
+import PieChart from "../charts/PieChart";
 
 // css import
 import "./Visualize.css";
 
-const data01 = [
-  {
-    name: "Python",
-    value: 400,
-  },
-  {
-    name: "React",
-    value: 300,
-  },
-  {
-    name: "Group C",
-    value: 300,
-  },
-  {
-    name: "Group D",
-    value: 200,
-  },
-  {
-    name: "Group E",
-    value: 278,
-  },
-  {
-    name: "Group F",
-    value: 189,
-  },
-];
-
 function Visualize() {
   const { fetchActivityTypeActivities } = useContext(GlobalContext);
-  const [data, setData] = useState([]);
+  const [chartData, setchartData] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       let response = await fetchActivityTypeActivities();
-      setData(response);
+      response = response.filter((item) => item.total_time_spent !== null);
+      setchartData(() => {
+        return {
+          labels: response.map((item) => item.name),
+          datasets: [
+            {
+              label: "Time invested",
+              data: response.map((item) => item.total_time_spent),
+              backgroundColor: response.map(
+                () => "#" + Math.random().toString(16).substr(-6)
+              ),
+            },
+          ],
+        };
+      });
     }
     fetchData();
   }, [fetchActivityTypeActivities]);
   return (
     <div className="visualize">
       <center>
-        <div className="visualize__chartsArea">
-          {data.length > 0 && (
-            <PieChartExtended
-              data={data}
-              nameKey={"name"}
-              dataKey={"total_time_spent"}
-            />
-          )}
-        </div>
+        <div className="visualize__pieChart"></div>
+        {chartData.labels && (
+          <PieChart
+            chartData={chartData}
+            chartTitle="Time invested in last 7 days"
+          />
+        )}
       </center>
     </div>
   );
