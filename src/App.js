@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Activity from "./components/Activity";
 import MessageBar from "./components/MessageBar";
+import Visualize from "./components/Visualize";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <MessageBar />
       <Activity />
+      <Visualize />
     </div>
   );
 }

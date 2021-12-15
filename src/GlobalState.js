@@ -12,6 +12,7 @@ import {
   postActivityType,
   postAddActivity,
   getActivitiesApi,
+  getActivityTypesFetchActivitiesApi,
 } from "./api/API";
 import {
   setUser,
@@ -117,6 +118,11 @@ export const GlobalProvider = ({ children }) => {
     []
   );
 
+  const fetchActivityTypeActivities = useCallback(async () => {
+    let response = await getActivityTypesFetchActivitiesApi();
+    return response.data;
+  }, []);
+
   useEffect(() => {
     getUser();
   }, []);
@@ -133,6 +139,7 @@ export const GlobalProvider = ({ children }) => {
         addActivityType,
         saveActivity,
         getActivities,
+        fetchActivityTypeActivities,
       }}
     >
       {children}

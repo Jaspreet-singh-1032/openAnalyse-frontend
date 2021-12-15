@@ -34,3 +34,21 @@ export const getActivitiesApi = async (created_gte = "", created_lte = "") => {
   );
   return response;
 };
+
+export const getActivityTypesFetchActivitiesApi = async () => {
+  /*
+  return all activitt_types and total_time_spent on each
+  example response :- [
+    {
+        "id": 1,
+        "name": "react",
+        "total_time_spent": "4:00:00"
+    },
+  ]
+  */
+  const response = await get(
+    `${BASE_URL}/api/activities/activity-types/fetch_activities/`,
+    true
+  );
+  return response;
+};

@@ -1,0 +1,7 @@
+@media only screen and (min-width: 500px) {
+  /* for large screen */
+  .pieChart {
+    width: 400px !important;
+    height: 400px !important;
+  }
+}
