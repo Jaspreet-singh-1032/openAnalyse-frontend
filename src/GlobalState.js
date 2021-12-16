@@ -22,6 +22,7 @@ import {
   userLogoutAction,
   setActivities,
   addActivity,
+  refreshGraph,
 } from "./actions";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   message: {},
   activityTypes: [],
   activities: [],
+  refreshGraph: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -103,6 +105,7 @@ export const GlobalProvider = ({ children }) => {
           response.data.activity_type
         )
       );
+      dispatch(refreshGraph());
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }

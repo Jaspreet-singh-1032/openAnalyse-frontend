@@ -45,3 +45,10 @@ export const addActivity = (id, time_spent, activity_type) => ({
     data: { id, time_spent, activity_type },
   },
 });
+
+export const refreshGraph = () => ({
+  type: actions.refreshGraph,
+  payload: {
+    data: {},
+  },
+});

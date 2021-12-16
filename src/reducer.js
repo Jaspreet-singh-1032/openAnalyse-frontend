@@ -43,6 +43,12 @@ const reducer = (state = {}, action) => {
     };
   }
 
+  if (action.type === actions.refreshGraph) {
+    return {
+      ...state,
+      refreshGraph: !state.refreshGraph,
+    };
+  }
   return state;
 };
 
