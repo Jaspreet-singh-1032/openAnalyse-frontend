@@ -31,7 +31,9 @@ const renderRow = (props) => {
         <ListItemText primary={data[index].activity_type} />
         <ListItemText
           secondary={
-            time / 60 / 60 >= 1 ? `${time / 60 / 60} Hrs` : `${time / 60} mins`
+            time / 60 / 60 >= 1
+              ? `${parseFloat(time / 60 / 60).toFixed(1)} Hrs`
+              : `${time / 60} mins`
           }
         />
       </ListItemButton>

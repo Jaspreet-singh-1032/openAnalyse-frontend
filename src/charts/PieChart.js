@@ -20,9 +20,11 @@ function PieChart({ chartData, chartTitle }) {
             legend: {
               display: true,
               position: "bottom",
+              align: "center",
               labels: {
+                usePointStyle: true,
                 font: {
-                  size: 15,
+                  size: 14,
                 },
               },
             },
