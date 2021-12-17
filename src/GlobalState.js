@@ -23,6 +23,7 @@ import {
   setActivities,
   addActivity,
   refreshGraph,
+  setFilterByDays,
 } from "./actions";
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   activityTypes: [],
   activities: [],
   refreshGraph: false,
+  filterByDays: 7,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -126,6 +128,11 @@ export const GlobalProvider = ({ children }) => {
     return response.data;
   }, []);
 
+  const filterByDays = (days = 7) => {
+    console.log("==============", days);
+    dispatch(setFilterByDays(days));
+  };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -143,6 +150,7 @@ export const GlobalProvider = ({ children }) => {
         saveActivity,
         getActivities,
         fetchActivityTypeActivities,
+        filterByDays,
       }}
     >
       {children}

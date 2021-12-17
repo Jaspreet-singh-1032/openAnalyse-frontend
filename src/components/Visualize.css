@@ -1,6 +1,6 @@
-/* .visualize {
-  margin: 10px auto;
-} */
+.visualize {
+  padding: 20px;
+}
 .visualize__pieChart {
   width: 300px;
 }

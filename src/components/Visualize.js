@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { GlobalContext } from "../GlobalState";
 import PieChart from "../charts/PieChart";
+import ChartFilterForm from "./ChartFilterForm";
 
 // css import
 import "./Visualize.css";
@@ -32,16 +33,17 @@ function Visualize() {
       });
     }
     fetchData();
-  }, [fetchActivityTypeActivities, state.refreshGraph]);
+  }, [fetchActivityTypeActivities, state.refreshGraph, state.filterByDays]);
   return (
     <div className="visualize">
       <center>
+        <ChartFilterForm />
         <div className="visualize__pieChart"></div>
         {chartData.labels && (
           <>
             <PieChart
               chartData={chartData}
-              chartTitle="Hours invested in last 7 days"
+              chartTitle={`Hours invested in last ${state.filterByDays} days`}
             />
           </>
         )}
