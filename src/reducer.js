@@ -49,6 +49,14 @@ const reducer = (state = {}, action) => {
       refreshGraph: !state.refreshGraph,
     };
   }
+
+  if (action.type === actions.setFilterByDays) {
+    console.log(">>>>>>>>>>>>>>>", action.payload);
+    return {
+      ...state,
+      filterByDays: action.payload.data.days,
+    };
+  }
   return state;
 };
 
