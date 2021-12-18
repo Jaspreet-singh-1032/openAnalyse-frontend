@@ -35,7 +35,7 @@ export const getActivitiesApi = async (created_gte = "", created_lte = "") => {
   return response;
 };
 
-export const getActivityTypesFetchActivitiesApi = async () => {
+export const getActivityTypesFetchActivitiesApi = async (days) => {
   /*
   return all activitt_types and total_time_spent on each
   example response :- [
@@ -46,8 +46,11 @@ export const getActivityTypesFetchActivitiesApi = async () => {
     },
   ]
   */
+  const filters = [`days=${days}`];
   const response = await get(
-    `${BASE_URL}/api/activities/activity-types/fetch_activities/`,
+    `${BASE_URL}/api/activities/activity-types/fetch_activities/?${filters.join(
+      "&"
+    )}`,
     true
   );
   return response;

@@ -53,9 +53,9 @@ export const refreshGraph = () => ({
   },
 });
 
-export const setFilterByDays = (days) => ({
-  type: actions.setFilterByDays,
+export const setChartFilter = (filter) => ({
+  type: actions.setChartFilter,
   payload: {
-    data: { days },
+    data: { ...filter },
   },
 });

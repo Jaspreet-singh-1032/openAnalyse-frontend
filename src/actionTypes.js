@@ -6,4 +6,4 @@ export const addActivityType = "addActivityType";
 export const setActivities = "setActivities";
 export const addActivity = "addActivity";
 export const refreshGraph = "refreshGraph";
-export const setFilterByDays = "setFilterByDays";
+export const setChartFilter = "setChartFilter";

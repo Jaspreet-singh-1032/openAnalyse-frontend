@@ -23,16 +23,18 @@ import {
   setActivities,
   addActivity,
   refreshGraph,
-  setFilterByDays,
+  setChartFilter,
 } from "./actions";
 
+import { chartFilters } from "./constants";
+
 const initialState = {
-  user: {},
+  user: null,
   message: {},
   activityTypes: [],
   activities: [],
   refreshGraph: false,
-  filterByDays: 7,
+  chartFilter: chartFilters[2],
 };
 
 export const GlobalContext = createContext(initialState);
@@ -120,17 +122,19 @@ export const GlobalProvider = ({ children }) => {
         dispatch(setActivities(response.data));
       }
     },
-    []
+    [state.user]
   );
 
-  const fetchActivityTypeActivities = useCallback(async () => {
-    let response = await getActivityTypesFetchActivitiesApi();
-    return response.data;
-  }, []);
+  const fetchActivityTypeActivities = useCallback(
+    async (days = "7") => {
+      let response = await getActivityTypesFetchActivitiesApi(days);
+      return response.data;
+    },
+    [state.user]
+  );
 
-  const filterByDays = (days = 7) => {
-    console.log("==============", days);
-    dispatch(setFilterByDays(days));
+  const updateChartFilter = (filter) => {
+    dispatch(setChartFilter(filter));
   };
 
   useEffect(() => {
@@ -150,7 +154,7 @@ export const GlobalProvider = ({ children }) => {
         saveActivity,
         getActivities,
         fetchActivityTypeActivities,
-        filterByDays,
+        updateChartFilter,
       }}
     >
       {children}
