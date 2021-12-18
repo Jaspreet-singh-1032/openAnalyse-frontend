@@ -109,7 +109,7 @@ function Navbar() {
       {/* ======================= End Modal ======================= */}
       <h1>openAnalyse</h1>
       <div className="navbar__loginContainer">
-        {state.user.email === undefined ? (
+        {!state.user ? (
           <>
             <Button onClick={() => openModal({ modalType: login })}>
               Login

@@ -13,27 +13,29 @@ function Visualize() {
 
   useEffect(() => {
     async function fetchData() {
-      let response = await fetchActivityTypeActivities();
-      response = response.filter((item) => item.total_time_spent !== null);
-      setchartData(() => {
-        return {
-          labels: response.map((item) => item.name),
-          datasets: [
-            {
-              label: "Hours invested",
-              data: response.map((item) =>
-                parseFloat(item.total_time_spent / 60 / 60).toFixed(1)
-              ),
-              backgroundColor: response.map(
-                () => "#" + Math.random().toString(16).substr(-6)
-              ),
-            },
-          ],
-        };
-      });
+      let response = await fetchActivityTypeActivities(state.chartFilter.days);
+      if (!response.detail) {
+        response = response.filter((item) => item.total_time_spent !== "0");
+        setchartData(() => {
+          return {
+            labels: response.map((item) => item.name),
+            datasets: [
+              {
+                label: "Hours invested",
+                data: response.map((item) =>
+                  parseFloat(item.total_time_spent / 60 / 60).toFixed(1)
+                ),
+                backgroundColor: response.map(
+                  () => "#" + Math.random().toString(16).substr(-6)
+                ),
+              },
+            ],
+          };
+        });
+      }
     }
     fetchData();
-  }, [fetchActivityTypeActivities, state.refreshGraph, state.filterByDays]);
+  }, [fetchActivityTypeActivities, state.refreshGraph, state.chartFilter]);
   return (
     <div className="visualize">
       <center>
@@ -43,7 +45,7 @@ function Visualize() {
           <>
             <PieChart
               chartData={chartData}
-              chartTitle={`Hours invested in last ${state.filterByDays} days`}
+              chartTitle={`Time invested ${state.chartFilter.text}`}
             />
           </>
         )}

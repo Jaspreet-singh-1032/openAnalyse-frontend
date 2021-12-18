@@ -8,7 +8,7 @@ const reducer = (state = {}, action) => {
   if (action.type === actions.Logout) {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    return { ...state, user: {} };
+    return { ...state, user: null };
   }
 
   if (action.type === actions.setMessage) {
@@ -50,11 +50,10 @@ const reducer = (state = {}, action) => {
     };
   }
 
-  if (action.type === actions.setFilterByDays) {
-    console.log(">>>>>>>>>>>>>>>", action.payload);
+  if (action.type === actions.setChartFilter) {
     return {
       ...state,
-      filterByDays: action.payload.data.days,
+      chartFilter: action.payload.data,
     };
   }
   return state;

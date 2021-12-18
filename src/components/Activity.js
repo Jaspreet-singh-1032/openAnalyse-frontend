@@ -83,6 +83,7 @@ function Activity() {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
+              required
               value={activity}
               onChange={handleChange}
               label="Age"
