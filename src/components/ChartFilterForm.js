@@ -10,7 +10,7 @@ import { chartFilters } from "../constants";
 import "./chartFilterFrom.css";
 
 function ChartFilterForm() {
-  const { updateChartFilter, state } = useContext(GlobalContext);
+  const { updateChartFilter } = useContext(GlobalContext);
   const [filter, setFilter] = useState("");
 
   const handleChange = (e) => {

@@ -3,6 +3,7 @@ export const chartFilters = [
   { text: "Today", days: 0 },
   { text: "Last Three Days", days: 3 },
   { text: "Last Week", days: 7 },
+  { text: "Last Two Weeks", days: 14 },
   { text: "Last Month", days: monthDays },
   { text: "Last Three Months", days: monthDays * 3 },
   { text: "Last Six Months", days: monthDays * 6 },
