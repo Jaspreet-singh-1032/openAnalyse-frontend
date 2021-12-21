@@ -41,13 +41,15 @@ function Visualize() {
       <center>
         <ChartFilterForm />
         <div className="visualize__pieChart"></div>
-        {chartData.labels && (
+        {chartData.labels && chartData.labels.length > 0 ? (
           <>
             <PieChart
               chartData={chartData}
               chartTitle={`Time invested ${state.chartFilter.text}`}
             />
           </>
+        ) : (
+          <h3>No activities for {state.chartFilter.text}</h3>
         )}
       </center>
     </div>

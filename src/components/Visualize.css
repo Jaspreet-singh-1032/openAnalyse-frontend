@@ -1,5 +1,6 @@
 .visualize {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 .visualize__pieChart {
   width: 300px;
