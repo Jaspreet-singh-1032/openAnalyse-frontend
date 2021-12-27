@@ -9,14 +9,15 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 
+import PropTypes from "prop-types";
+
 // actions import
 import { GlobalContext } from "../GlobalState";
 
-export default function NavMenu({ user, dispatch }) {
+export default function NavMenu({ user }) {
   const { userLogout } = useContext(GlobalContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
   const handleLogout = () => {
     userLogout();
   };
@@ -97,3 +98,7 @@ export default function NavMenu({ user, dispatch }) {
     </React.Fragment>
   );
 }
+
+NavMenu.PropTypes = {
+  user: PropTypes.object,
+};

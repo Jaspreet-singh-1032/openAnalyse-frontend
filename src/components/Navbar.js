@@ -26,8 +26,7 @@ const style = {
 };
 
 function Navbar() {
-  const { state, dispatch, userLogin, userRegister } =
-    useContext(GlobalContext);
+  const { state, userLogin, userRegister } = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -120,7 +119,7 @@ function Navbar() {
           </>
         ) : (
           <>
-            <NavMenu user={state.user} dispatch={dispatch} />
+            <NavMenu user={state.user} />
           </>
         )}
       </div>

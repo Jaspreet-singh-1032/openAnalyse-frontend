@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-function ManageActivityModal({ open, setOpen, setActivityTypes }) {
+function ManageActivityModal({ open, setOpen }) {
   const { addActivityType } = useContext(GlobalContext);
   const [name, setName] = useState("");
   const handleSubmit = (e) => {
