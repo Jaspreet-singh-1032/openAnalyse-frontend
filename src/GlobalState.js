@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-
+import PropTypes from "prop-types";
 import reducer from "./reducer";
 import { getUserApi, userLoginApi, userRegisterApi } from "./api/Auth";
 import {
@@ -160,4 +160,8 @@ export const GlobalProvider = ({ children }) => {
       {children}
     </GlobalContext.Provider>
   );
+};
+
+GlobalProvider.propTypes = {
+  children: PropTypes.node,
 };

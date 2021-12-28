@@ -118,7 +118,7 @@ function Activity() {
       </div>
 
       <div className="activity__todayActivities">
-        <h3>Today's Activities</h3>
+        <h3>Today&apos;s Activities</h3>
         {state.activities.length === 0 && (
           <p>You have no activities for today...</p>
         )}
