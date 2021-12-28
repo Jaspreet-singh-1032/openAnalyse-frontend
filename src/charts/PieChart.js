@@ -2,6 +2,8 @@ import React from "react";
 import "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 
+import PropTypes from "prop-types";
+
 import "./PieChart.css";
 function PieChart({ chartData, chartTitle }) {
   return (
@@ -35,4 +37,8 @@ function PieChart({ chartData, chartTitle }) {
   );
 }
 
+PieChart.propTypes = {
+  chartData: PropTypes.object,
+  chartTitle: PropTypes.string,
+};
 export default PieChart;

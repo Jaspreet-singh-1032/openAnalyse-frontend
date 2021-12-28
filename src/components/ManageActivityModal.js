@@ -5,6 +5,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import "./ManageActivityModal.css";
 
+import PropTypes from "prop-types";
+
 import { GlobalContext } from "../GlobalState";
 
 const style = {
@@ -56,5 +58,10 @@ function ManageActivityModal({ open, setOpen }) {
     </div>
   );
 }
+
+ManageActivityModal.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+};
 
 export default ManageActivityModal;

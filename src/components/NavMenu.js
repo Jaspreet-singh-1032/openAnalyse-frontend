@@ -99,6 +99,6 @@ export default function NavMenu({ user }) {
   );
 }
 
-NavMenu.PropTypes = {
+NavMenu.propTypes = {
   user: PropTypes.object,
 };
