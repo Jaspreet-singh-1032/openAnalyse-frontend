@@ -20,9 +20,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/app" element={<Main />} />
         <Route path="*" element={<Home />} />
-        {/* <MessageBar />
-      <Activity />
-      <Visualize /> */}
       </Routes>
     </div>
   );

@@ -2,17 +2,32 @@
   /* for large screen */
   .home__mainText h1 {
     font-size: 3rem !important;
+    padding: 0 50px;
+  }
+  .home__mainText h2 {
+    padding: 0 100px !important;
   }
 }
 
 .home {
   padding: 10px 0;
+  background-color: rgb(245 245 245 / 91%);
+  height: 100vh;
 }
 .home__mainText {
   text-align: center;
-  padding: 0 50px;
 }
 
 .home__mainText h1 {
   font-size: 2rem;
+}
+.chartImg {
+  object-fit: contain;
+  max-width: 100%;
+  margin: auto;
+}
+.home__chartExampleConatiner {
+  display: grid;
+  padding-top: 50px;
+  text-align: center;
 }
