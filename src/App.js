@@ -1,21 +1,26 @@
 import React from "react";
 
-// css import
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
 // components import
 import Navbar from "./components/Navbar";
-import Activity from "./components/Activity";
 import MessageBar from "./components/MessageBar";
-import Visualize from "./components/Visualize";
+import Home from "./components/Home";
+import Main from "./components/Main";
+
+// css import
+import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Navbar />
       <MessageBar />
-      <Activity />
-      <Visualize />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/app" element={<Main />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
     </div>
   );
 }

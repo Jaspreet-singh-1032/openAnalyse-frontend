@@ -14,9 +14,9 @@
 
 .activity {
   padding: 20px;
-  border: 1px solid lightgray;
   justify-content: center;
   height: auto;
+  background-color: rgb(245 245 245 / 91%);
 }
 
 .activity__form {
@@ -25,7 +25,6 @@
   row-gap: 10px;
   column-gap: 10px;
   /* width: 30vw; */
-  border: 1px solid lightgray;
   padding: 20px;
   box-shadow: 0px 0px 10px 2px lightgrey;
   margin-bottom: 10px;
