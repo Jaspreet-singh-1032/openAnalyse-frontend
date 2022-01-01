@@ -16,8 +16,22 @@ function Home() {
           </h2>
         </div>
         <div className="home__chartExampleConatiner">
-          <h3>See chart visualizations of where did you spent your time.</h3>
+          <h3>See chart visualizations of how did you spent your time.</h3>
           <img className="chartImg" src={chartExample} alt="img" />
+        </div>
+        <div className="home__description">
+          <h1>Why this app ?</h1>
+          <p>
+            The main idea behind this app is to help students/learners to
+            analyse how they are investing their time.
+            <br />
+            Generally everyone have some goals in life. Long term goals and
+            short term goals.
+            <br />
+            And to achieve those goals we have to take little steps everyday.
+            <br />
+            And this is for what this app is.
+          </p>
         </div>
       </Container>
     </div>

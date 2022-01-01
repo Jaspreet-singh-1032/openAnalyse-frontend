@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-
+import GitHubIcon from "@mui/icons-material/GitHub";
 // components import
 import { GlobalContext } from "../GlobalState";
 import NavMenu from "./NavMenu";
@@ -109,6 +109,13 @@ function Navbar() {
       <Link to="/" className="navbar__brand">
         <h1>openAnalyse</h1>
       </Link>
+      <a
+        href="https://github.com/Jaspreet-singh-1032/openAnalyse-frontend"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <GitHubIcon />
+      </a>
       <div className="navbar__loginContainer">
         {!state.user ? (
           <>
