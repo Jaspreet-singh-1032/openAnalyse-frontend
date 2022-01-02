@@ -114,7 +114,7 @@ function Navbar() {
         target="_blank"
         rel="noreferrer"
       >
-        <GitHubIcon />
+        <GitHubIcon sx={{ width: 28, height: 28 }} />
       </a>
       <div className="navbar__loginContainer">
         {!state.user ? (

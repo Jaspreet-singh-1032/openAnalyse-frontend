@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
-
+import Button from "@mui/material/Button";
 import chartExample from "../static/chart-example.png";
+
 import "./Home.css";
 
+import { GlobalContext } from "../GlobalState";
+
 function Home() {
+  const { state } = useContext(GlobalContext);
   return (
     <div className="home">
       <Container>
@@ -14,6 +19,13 @@ function Home() {
             openAnalyse is an open-source application that helps users to
             analyse how they are investing their time.
           </h2>
+          {state.user && (
+            <div className="home__goToAppButton">
+              <Link to="/app" style={{ textDecoration: "none" }}>
+                <Button variant="contained">Go to app</Button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="home__chartExampleConatiner">
           <h3>See chart visualizations of how did you spent your time.</h3>
@@ -25,12 +37,13 @@ function Home() {
             The main idea behind this app is to help students/learners to
             analyse how they are investing their time.
             <br />
-            Generally everyone have some goals in life. Long term goals and
-            short term goals.
+            Everyone have some goals in life.
             <br />
             And to achieve those goals we have to take little steps everyday.
             <br />
-            And this is for what this app is.
+            openAnalyse helps to see a overall visualization of time invested on
+            each activity.
+            <br />
           </p>
         </div>
       </Container>
