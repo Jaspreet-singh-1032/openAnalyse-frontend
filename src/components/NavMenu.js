@@ -33,7 +33,7 @@ export default function NavMenu({ user }) {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ width: 32, height: 32 }}>
+            <Avatar sx={{ width: 40, height: 40 }}>
               {user.username !== "" ? user.username[0].toUpperCase() : null}
             </Avatar>
           </IconButton>
