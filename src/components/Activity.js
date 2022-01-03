@@ -54,6 +54,8 @@ function Activity() {
     let time = timeSpent.split(":");
     let toSeconds = time[0] * 60 * 60 + time[1] * 60;
     saveActivity(activity, toSeconds);
+    setActivity("");
+    setTimeSpent(0);
   };
 
   const handleChange = (event) => {
@@ -119,28 +121,28 @@ function Activity() {
 
       <div className="activity__todayActivities">
         <h3>Today&apos;s Activities</h3>
-        {state.activities.length === 0 && (
+        {state.activities.length === 0 ? (
           <p>You have no activities for today...</p>
-        )}
-        <Box
-          sx={{
-            width: "100%",
-            height: 200,
-            maxWidth: 360,
-            bgcolor: "background.paper",
-          }}
-        >
-          <FixedSizeList
-            height={200}
-            width="100%"
-            itemSize={46}
-            itemCount={state.activities.length}
-            overscanCount={5}
-            itemData={state.activities}
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "rgb(245 245 245 / 91%)",
+            }}
           >
-            {renderRow}
-          </FixedSizeList>
-        </Box>
+            <FixedSizeList
+              height={200}
+              width="100%"
+              itemSize={46}
+              itemCount={state.activities.length}
+              overscanCount={5}
+              itemData={state.activities}
+            >
+              {renderRow}
+            </FixedSizeList>
+          </Box>
+        )}
       </div>
     </div>
   );

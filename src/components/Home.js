@@ -41,8 +41,8 @@ function Home() {
             <br />
             And to achieve those goals we have to take little steps everyday.
             <br />
-            openAnalyse helps to see a overall visualization of time invested on
-            each activity.
+            openAnalyse provides chart visualizations of time invested on each
+            activity using various time frame filters.
             <br />
           </p>
         </div>
