@@ -28,7 +28,9 @@ function Home() {
           )}
         </div>
         <div className="home__chartExampleConatiner">
-          <h3>See chart visualizations of how did you spent your time.</h3>
+          <h3>
+            <u>See chart visualizations of how did you spent your time.</u>
+          </h3>
           <img className="chartImg" src={chartExample} alt="img" />
         </div>
         <div className="home__description">
