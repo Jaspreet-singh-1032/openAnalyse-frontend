@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import MessageBar from "./components/MessageBar";
 import Home from "./components/Home";
 import Main from "./components/Main";
+import Footer from "./components/Footer";
 import { GlobalContext } from "./GlobalState";
 
 // css import
@@ -23,6 +24,7 @@ function App() {
         {state.user && <Route path="app" element={<Main />} />}
         <Route path="*" element={<Home />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

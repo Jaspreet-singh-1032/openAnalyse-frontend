@@ -54,8 +54,6 @@ function Activity() {
     let time = timeSpent.split(":");
     let toSeconds = time[0] * 60 * 60 + time[1] * 60;
     saveActivity(activity, toSeconds);
-    setActivity("");
-    setTimeSpent(0);
   };
 
   const handleChange = (event) => {
