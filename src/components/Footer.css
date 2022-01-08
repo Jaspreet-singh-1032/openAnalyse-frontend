@@ -11,6 +11,8 @@
 
 .footer__linksContainer a {
   color: white;
+  text-decoration: none;
+  color: skyblue;
 }
 
 .footer__main {

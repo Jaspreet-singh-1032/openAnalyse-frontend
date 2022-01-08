@@ -22,9 +22,9 @@ function Footer() {
           Linkedin
         </a>
         <br />
-        <a href="">Gmail</a>
+        <a href="mailto:jassimehra2612@gmail.com">jassimehra2612@gmail.com</a>
       </div>
-      <div className="footer__main">For developers:-</div>
+      <div className="footer__main">Guthub links:-</div>
       <div className="footer__linksContainer">
         <a
           href="https://github.com/Jaspreet-singh-1032/openAnalyse-frontend"
