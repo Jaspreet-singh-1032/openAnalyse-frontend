@@ -16,8 +16,8 @@ function Home() {
         <div className="home__mainText">
           <h1>Keep learning! Keep Growing!</h1>
           <h2>
-            openAnalyse is an open-source application that helps users to
-            analyse how they are investing their time.
+            openAnalyse is an Free and open-source application that helps users
+            to analyse how they are investing their time.
           </h2>
           {state.user && (
             <div className="home__goToAppButton">
