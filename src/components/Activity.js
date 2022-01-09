@@ -8,7 +8,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import Box from "@mui/material/Box";
@@ -19,6 +18,7 @@ import { FixedSizeList } from "react-window";
 
 // components import
 import ManageActivityModal from "./ManageActivityModal";
+import TimeDurationInput from "./TimeDurationInput";
 import { GlobalContext } from "../GlobalState";
 
 const renderRow = (props) => {
@@ -45,14 +45,14 @@ function Activity() {
   const { fetchActivityTypes, state, saveActivity, getActivities } =
     useContext(GlobalContext);
   const [activity, setActivity] = useState("");
-  const [timeSpent, setTimeSpent] = useState(0);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
   // const [activityTypes, setActivityTypes] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let time = timeSpent.split(":");
-    let toSeconds = time[0] * 60 * 60 + time[1] * 60;
+    let toSeconds = hours * 60 * 60 + minutes * 60;
     saveActivity(activity, toSeconds);
   };
 
@@ -72,7 +72,6 @@ function Activity() {
       <ManageActivityModal
         open={openActivityManageModal}
         setOpen={setOpenActivityManageModal}
-        // setActivityTypes={setActivityTypes}
       />
       <div className="activity__activityManage">
         <form className="activity__form" onSubmit={handleSubmit}>
@@ -86,7 +85,7 @@ function Activity() {
               required
               value={activity}
               onChange={handleChange}
-              label="Age"
+              label="activity"
             >
               {state.activityTypes.map((item) => {
                 return (
@@ -101,14 +100,11 @@ function Activity() {
               })}
             </Select>
           </FormControl>
-          <TextField
-            id="timeSpent"
-            type="time"
-            value={timeSpent}
-            required
-            variant="filled"
-            helperText="Select time spent"
-            onChange={(e) => setTimeSpent(e.target.value)}
+          <TimeDurationInput
+            hours={hours}
+            minutes={minutes}
+            setHours={setHours}
+            setMinutes={setMinutes}
           />
           <Button type="submit">Submit</Button>
         </form>
