@@ -8,6 +8,7 @@ import MessageBar from "./components/MessageBar";
 import Home from "./components/Home";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 import { GlobalContext } from "./GlobalState";
 
 // css import
@@ -19,6 +20,7 @@ function App() {
     <div className="app">
       <Navbar />
       <MessageBar />
+      {state.loading && <Loading />}
       <Routes>
         <Route path="/" element={<Home />} />
         {state.user && <Route path="app" element={<Main />} />}

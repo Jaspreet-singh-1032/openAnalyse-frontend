@@ -59,3 +59,11 @@ export const setChartFilter = (filter) => ({
     data: { ...filter },
   },
 });
+
+export const startLoading = () => ({
+  type: actions.startLoading,
+});
+
+export const stopLoading = () => ({
+  type: actions.stopLoading,
+});
