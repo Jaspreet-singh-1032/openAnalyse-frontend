@@ -56,6 +56,21 @@ const reducer = (state = {}, action) => {
       chartFilter: action.payload.data,
     };
   }
+
+  if (action.type === actions.startLoading) {
+    return {
+      ...state,
+      loading: true,
+    };
+  }
+
+  if (action.type === actions.stopLoading) {
+    return {
+      ...state,
+      loading: false,
+    };
+  }
+
   return state;
 };
 

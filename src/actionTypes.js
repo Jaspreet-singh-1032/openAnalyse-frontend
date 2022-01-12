@@ -7,3 +7,5 @@ export const setActivities = "setActivities";
 export const addActivity = "addActivity";
 export const refreshGraph = "refreshGraph";
 export const setChartFilter = "setChartFilter";
+export const startLoading = "startLoading";
+export const stopLoading = "stopLoading";

@@ -24,6 +24,8 @@ import {
   addActivity,
   refreshGraph,
   setChartFilter,
+  startLoading,
+  stopLoading,
 } from "./actions";
 
 import { chartFilters } from "./constants";
@@ -35,6 +37,7 @@ const initialState = {
   activities: [],
   refreshGraph: false,
   chartFilter: chartFilters[2],
+  loading: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -43,13 +46,16 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUser = async () => {
+    dispatch(startLoading());
     let response = await getUserApi();
     if (response.status === 200) {
       dispatch(setUser(response.data));
     }
+    dispatch(stopLoading());
   };
 
   const userLogin = async (email, password, setOpen = null) => {
+    dispatch(startLoading());
     let response = await userLoginApi(email, password);
     if (response.status === 200) {
       dispatch(setUser(response.data.user));
@@ -59,9 +65,11 @@ export const GlobalProvider = ({ children }) => {
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }
+    dispatch(stopLoading());
   };
 
   const userRegister = async (email, password, username, setOpen) => {
+    dispatch(startLoading());
     let response = await userRegisterApi(email, password, username);
     if (response.status === 201) {
       dispatch(setUser(response.data.user));
@@ -72,6 +80,7 @@ export const GlobalProvider = ({ children }) => {
         setMessage(response.data.detail || response.data.email[0], "error")
       );
     }
+    dispatch(stopLoading());
   };
 
   const userLogout = () => {
@@ -81,13 +90,16 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const fetchActivityTypes = useCallback(async () => {
+    dispatch(startLoading());
     let response = await getActivityTypes();
     if (response.status === 200) {
       dispatch(setActivityTypes(response.data));
     }
+    dispatch(stopLoading());
   }, []);
 
   const addActivityType = async (name, setOpen = null) => {
+    dispatch(startLoading());
     let response = await postActivityType(name);
     if (response.status === 201) {
       dispatch(addActivityTypeAction(response.data.id, response.data.name));
@@ -96,9 +108,11 @@ export const GlobalProvider = ({ children }) => {
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }
+    dispatch(stopLoading());
   };
   //
   const saveActivity = async (activityTypeId, timeSpent) => {
+    dispatch(startLoading());
     let response = await postAddActivity(activityTypeId, timeSpent);
     if (response.status === 201) {
       dispatch(setMessage("Saved successfully", "success"));
@@ -113,21 +127,26 @@ export const GlobalProvider = ({ children }) => {
     } else {
       dispatch(setMessage(response.data.detail, "error"));
     }
+    dispatch(stopLoading());
   };
 
   const getActivities = useCallback(
     async (created_gte = "", created_lte = "") => {
+      dispatch(startLoading());
       let response = await getActivitiesApi(created_gte, created_lte);
       if (response.status === 200) {
         dispatch(setActivities(response.data));
       }
+      dispatch(stopLoading());
     },
     [state.user]
   );
 
   const fetchActivityTypeActivities = useCallback(
     async (days = "7") => {
+      dispatch(startLoading());
       let response = await getActivityTypesFetchActivitiesApi(days);
+      dispatch(stopLoading());
       return response.data;
     },
     [state.user]
