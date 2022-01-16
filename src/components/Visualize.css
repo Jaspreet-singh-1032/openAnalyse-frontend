@@ -1,7 +1,18 @@
+@media only screen and (min-width: 550px) {
+  /* for large screen */
+  .visualize__data {
+    display: grid;
+    grid-template-columns: 30% 50%;
+  }
+}
 .visualize {
   padding-top: 20px;
   padding-bottom: 30px;
+  text-align: center;
 }
 .visualize__pieChart {
   width: 300px;
+}
+.visualize__data {
+  justify-content: center;
 }

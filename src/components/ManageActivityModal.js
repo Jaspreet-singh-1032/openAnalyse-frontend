@@ -48,6 +48,7 @@ function ManageActivityModal({ open, setOpen }) {
               variant="standard"
               required
               autoComplete="off"
+              inputProps={{ maxLength: 30 }}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

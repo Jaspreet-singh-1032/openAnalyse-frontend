@@ -21,21 +21,18 @@ import ManageActivityModal from "./ManageActivityModal";
 import TimeDurationInput from "./TimeDurationInput";
 import { GlobalContext } from "../GlobalState";
 
+// utils import
+import { secondsToTimeStamp } from "../utils";
+
 const renderRow = (props) => {
   const { index, style, data } = props;
-  let time = data[index].time_spent;
+  let seconds = data[index].time_spent;
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
         <ListItemText primary={data[index].activity_type} />
-        <ListItemText
-          secondary={
-            time / 60 / 60 >= 1
-              ? `${parseFloat(time / 60 / 60).toFixed(1)} Hrs`
-              : `${time / 60} mins`
-          }
-        />
+        <ListItemText secondary={secondsToTimeStamp(seconds)} />
       </ListItemButton>
     </ListItem>
   );
