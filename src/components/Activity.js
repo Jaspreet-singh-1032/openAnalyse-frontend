@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 
@@ -30,10 +29,8 @@ const renderRow = (props) => {
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        <ListItemText primary={data[index].activity_type} />
-        <ListItemText secondary={secondsToTimeStamp(seconds)} />
-      </ListItemButton>
+      <ListItemText primary={data[index].activity_type} />~{" "}
+      {secondsToTimeStamp(seconds)}
     </ListItem>
   );
 };
