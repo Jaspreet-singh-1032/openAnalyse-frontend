@@ -42,6 +42,13 @@ function Activity() {
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const manageActivitesButton = () => {
+    return (
+      <Button variant="text" onClick={() => setOpenActivityManageModal(true)}>
+        Manage Activities
+      </Button>
+    );
+  };
   // const [activityTypes, setActivityTypes] = useState([]);
 
   const handleSubmit = (e) => {
@@ -81,17 +88,19 @@ function Activity() {
               onChange={handleChange}
               label="activity"
             >
-              {state.activityTypes.map((item) => {
-                return (
-                  <MenuItem
-                    key={item.id}
-                    value={item.id}
-                    className="activity__selectItem"
-                  >
-                    {item.name}
-                  </MenuItem>
-                );
-              })}
+              {state.activityTypes.length > 0
+                ? state.activityTypes.map((item) => {
+                    return (
+                      <MenuItem
+                        key={item.id}
+                        value={item.id}
+                        className="activity__selectItem"
+                      >
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })
+                : manageActivitesButton()}
             </Select>
           </FormControl>
           <TimeDurationInput
@@ -102,9 +111,7 @@ function Activity() {
           />
           <Button type="submit">Submit</Button>
         </form>
-        <Button variant="text" onClick={() => setOpenActivityManageModal(true)}>
-          Manage Activities
-        </Button>
+        {manageActivitesButton()}
       </div>
 
       <div className="activity__todayActivities">
