@@ -1,5 +1,7 @@
-export const BASE_URL = "https://openanalyse.herokuapp.com";
-// export const BASE_URL = "http://127.0.0.1:8000";
+export const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://openanalyse.herokuapp.com"
+    : "http://localhost:8000";
 
 export const post = async (url, data = {}, authenticate = false) => {
   /*

@@ -14,7 +14,7 @@ import "./Visualize.css";
 function Visualize() {
   const { fetchActivityTypeActivities, state } = useContext(GlobalContext);
   const [chartData, setchartData] = useState({});
-  const [activitiesTableData, setActivitiesTableData] = useState([]);
+  const [activitiesTableData, setActivitiesTableData] = useState([]); // all activity_types and total time spent on each
 
   useEffect(async () => {
     let response = await fetchActivityTypeActivities(state.chartFilter.days);
@@ -52,6 +52,7 @@ function Visualize() {
       });
     }
   }, [fetchActivityTypeActivities, state.refreshGraph, state.chartFilter]);
+
   return (
     <div className="visualize">
       <ChartFilterForm />
