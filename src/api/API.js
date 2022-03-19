@@ -1,8 +1,8 @@
-import { BASE_URL, post, get } from "./Utils";
+import { API_BASE_URL, post, get } from "./Utils";
 
 export const postActivityType = async (name) => {
   const response = await post(
-    `${BASE_URL}/api/activities/activity-types/`,
+    `${API_BASE_URL}/api/activities/activity-types/`,
     { name },
     true
   );
@@ -11,7 +11,7 @@ export const postActivityType = async (name) => {
 
 export const getActivityTypes = async () => {
   const response = await get(
-    `${BASE_URL}/api/activities/activity-types/`,
+    `${API_BASE_URL}/api/activities/activity-types/`,
     true
   );
   return response;
@@ -19,7 +19,7 @@ export const getActivityTypes = async () => {
 
 export const postAddActivity = async (activityTypeId, timeSpent) => {
   const response = await post(
-    `${BASE_URL}/api/activities/activity-types/${activityTypeId}/add_activity/`,
+    `${API_BASE_URL}/api/activities/activity-types/${activityTypeId}/add_activity/`,
     { time_spent: timeSpent },
     true
   );
@@ -29,7 +29,7 @@ export const postAddActivity = async (activityTypeId, timeSpent) => {
 export const getActivitiesApi = async (created_gte = "", created_lte = "") => {
   let filters = [`created__gte=${created_gte}`, `created__lte=${created_lte}`];
   const response = await get(
-    `${BASE_URL}/api/activities/?${filters.join("&")}`,
+    `${API_BASE_URL}/api/activities/?${filters.join("&")}`,
     true
   );
   return response;
@@ -37,7 +37,7 @@ export const getActivitiesApi = async (created_gte = "", created_lte = "") => {
 
 export const getActivityTypesFetchActivitiesApi = async (days) => {
   /*
-  return all activitt_types and total_time_spent on each
+  return all activity_types and total_time_spent on each
   example response :- [
     {
         "id": 1,
@@ -48,7 +48,7 @@ export const getActivityTypesFetchActivitiesApi = async (days) => {
   */
   const filters = [`days=${days}`];
   const response = await get(
-    `${BASE_URL}/api/activities/activity-types/fetch_activities/?${filters.join(
+    `${API_BASE_URL}/api/activities/activity-types/fetch_activities/?${filters.join(
       "&"
     )}`,
     true

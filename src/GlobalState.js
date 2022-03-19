@@ -20,8 +20,6 @@ import {
   setActivityTypes,
   addActivityTypeAction,
   userLogoutAction,
-  setActivities,
-  addActivity,
   refreshGraph,
   setChartFilter,
   startLoading,
@@ -34,7 +32,6 @@ const initialState = {
   user: null,
   message: {},
   activityTypes: [],
-  activities: [],
   refreshGraph: false,
   chartFilter: chartFilters[2],
   loading: false,
@@ -116,13 +113,6 @@ export const GlobalProvider = ({ children }) => {
     let response = await postAddActivity(activityTypeId, timeSpent);
     if (response.status === 201) {
       dispatch(setMessage("Saved successfully", "success"));
-      dispatch(
-        addActivity(
-          response.data.id,
-          response.data.time_spent,
-          response.data.activity_type
-        )
-      );
       dispatch(refreshGraph());
     } else {
       dispatch(setMessage(response.data.detail, "error"));
@@ -134,10 +124,11 @@ export const GlobalProvider = ({ children }) => {
     async (created_gte = "", created_lte = "") => {
       dispatch(startLoading());
       let response = await getActivitiesApi(created_gte, created_lte);
-      if (response.status === 200) {
-        dispatch(setActivities(response.data));
-      }
       dispatch(stopLoading());
+      if (response.status === 200) {
+        return response.data;
+      }
+      return [];
     },
     [state.user]
   );

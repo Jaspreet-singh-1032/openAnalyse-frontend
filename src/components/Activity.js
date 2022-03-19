@@ -39,9 +39,12 @@ function Activity() {
   const { fetchActivityTypes, state, saveActivity, getActivities } =
     useContext(GlobalContext);
   const [activity, setActivity] = useState("");
+  const [todayActivities, setTodayActivities] = useState([]);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const [refreshTodayActivitiestable, setRefreshTodayActivitiestable] =
+    useState(false);
   const manageActivitesButton = () => {
     return (
       <Button variant="text" onClick={() => setOpenActivityManageModal(true)}>
@@ -55,18 +58,20 @@ function Activity() {
     e.preventDefault();
     let toSeconds = hours * 60 * 60 + minutes * 60;
     saveActivity(activity, toSeconds);
+    setRefreshTodayActivitiestable(!refreshTodayActivitiestable);
   };
 
   const handleChange = (event) => {
     setActivity(event.target.value);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     fetchActivityTypes();
     let created_gte = new Date();
     created_gte.setHours(0, 0, 0, 0);
-    getActivities(created_gte.toJSON());
-  }, [fetchActivityTypes, getActivities]);
+    const activities = await getActivities(created_gte.toJSON());
+    setTodayActivities(activities);
+  }, [fetchActivityTypes, getActivities, refreshTodayActivitiestable]);
 
   return (
     <div className="activity">
@@ -116,7 +121,7 @@ function Activity() {
 
       <div className="activity__todayActivities">
         <h3>Today&apos;s Activities</h3>
-        {state.activities.length === 0 ? (
+        {todayActivities.length === 0 ? (
           <p>You have no activities for today...</p>
         ) : (
           <Box
@@ -130,9 +135,9 @@ function Activity() {
               height={200}
               width="100%"
               itemSize={46}
-              itemCount={state.activities.length}
+              itemCount={todayActivities.length}
               overscanCount={5}
-              itemData={state.activities}
+              itemData={todayActivities}
             >
               {renderRow}
             </FixedSizeList>

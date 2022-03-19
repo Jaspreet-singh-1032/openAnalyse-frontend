@@ -1,7 +1,7 @@
-import { BASE_URL, post, get } from "./Utils";
+import { API_BASE_URL, post, get } from "./Utils";
 
 export const userLoginApi = async (email, password) => {
-  const response = await post(`${BASE_URL}/api/user/login/`, {
+  const response = await post(`${API_BASE_URL}/api/user/login/`, {
     email,
     password,
   });
@@ -10,7 +10,7 @@ export const userLoginApi = async (email, password) => {
 };
 
 export const userRegisterApi = async (email, password, username) => {
-  const response = await post(`${BASE_URL}/api/user/register/`, {
+  const response = await post(`${API_BASE_URL}/api/user/register/`, {
     email,
     password,
     username,
@@ -20,6 +20,6 @@ export const userRegisterApi = async (email, password, username) => {
 };
 
 export const getUserApi = async () => {
-  const response = await get(`${BASE_URL}/api/user/`, true);
+  const response = await get(`${API_BASE_URL}/api/user/`, true);
   return response;
 };
