@@ -108,9 +108,9 @@ export const GlobalProvider = ({ children }) => {
     dispatch(stopLoading());
   };
   //
-  const saveActivity = async (activityTypeId, timeSpent) => {
+  const saveActivity = async (activityTypeId, body) => {
     dispatch(startLoading());
-    let response = await postAddActivity(activityTypeId, timeSpent);
+    let response = await postAddActivity(activityTypeId, body);
     if (response.status === 201) {
       dispatch(setMessage("Saved successfully", "success"));
       dispatch(refreshGraph());

@@ -17,10 +17,10 @@ export const getActivityTypes = async () => {
   return response;
 };
 
-export const postAddActivity = async (activityTypeId, timeSpent) => {
+export const postAddActivity = async (activityTypeId, body) => {
   const response = await post(
     `${API_BASE_URL}/api/activities/activity-types/${activityTypeId}/add_activity/`,
-    { time_spent: timeSpent },
+    body,
     true
   );
   return response;
