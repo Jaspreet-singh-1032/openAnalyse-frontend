@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
@@ -39,12 +40,11 @@ function Activity() {
   const { fetchActivityTypes, state, saveActivity, getActivities } =
     useContext(GlobalContext);
   const [activity, setActivity] = useState("");
+  const [activityDescription, setActivityDescription] = useState("");
   const [todayActivities, setTodayActivities] = useState([]);
   const [openActivityManageModal, setOpenActivityManageModal] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const [refreshTodayActivitiestable, setRefreshTodayActivitiestable] =
-    useState(false);
   const manageActivitesButton = () => {
     return (
       <Button variant="text" onClick={() => setOpenActivityManageModal(true)}>
@@ -57,8 +57,11 @@ function Activity() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let toSeconds = hours * 60 * 60 + minutes * 60;
-    saveActivity(activity, toSeconds);
-    setRefreshTodayActivitiestable(!refreshTodayActivitiestable);
+    let body = {
+      time_spent: toSeconds,
+      description: activityDescription,
+    };
+    saveActivity(activity, body);
   };
 
   const handleChange = (event) => {
@@ -71,7 +74,7 @@ function Activity() {
     created_gte.setHours(0, 0, 0, 0);
     const activities = await getActivities(created_gte.toJSON());
     setTodayActivities(activities);
-  }, [fetchActivityTypes, getActivities, refreshTodayActivitiestable]);
+  }, [fetchActivityTypes, getActivities, state.refreshGraph]);
 
   return (
     <div className="activity">
@@ -113,6 +116,15 @@ function Activity() {
             minutes={minutes}
             setHours={setHours}
             setMinutes={setMinutes}
+          />
+          <TextField
+            id="outlined-multiline-static"
+            label="Add a description..."
+            multiline
+            rows={4}
+            inputProps={{ maxLength: 500 }}
+            value={activityDescription}
+            onChange={(e) => setActivityDescription(e.target.value)}
           />
           <Button type="submit">Submit</Button>
         </form>

@@ -10,7 +10,7 @@ import { secondsToTimeStamp } from "../utils";
 import "./ActivitiesLog.css";
 
 export default function ActivitiesLog() {
-  const { getActivities } = useContext(GlobalContext);
+  const { getActivities, state } = useContext(GlobalContext);
   const [activitiesLog, setActivitiesLog] = useState([]);
   useEffect(async () => {
     const activities = await getActivities();
@@ -21,12 +21,12 @@ export default function ActivitiesLog() {
           id: index + 1,
           activity: item.activity_type,
           timeSpent: secondsToTimeStamp(item.time_spent),
-          description: "",
+          description: item.description,
           date: date.toLocaleDateString(),
         };
       });
     });
-  }, []);
+  }, [state.refreshGraph]);
   return (
     <div className="activitiesLog">
       <h1> Activity Logs</h1>

@@ -15,3 +15,10 @@ export const secondsToTimeStamp = (value) => {
   }
   return hours + ":" + minutes + ":" + seconds; // Return is HH : MM : SS
 };
+
+export const truncateText = (text, maxLength) => {
+  if (text.length > maxLength) {
+    return text.substr(0, maxLength) + "...";
+  }
+  return text;
+};
