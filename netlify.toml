@@ -1,0 +1,7 @@
+[[redirects]]
+from = "/app"
+to = "/app"
+
+[[redirects]]
+from = "/*"
+to = "/"
