@@ -1,7 +1,8 @@
 [[redirects]]
-from = "/app"
-to = "/app"
+  from = "/app"
+  to = "/app"
 
 [[redirects]]
-from = "/*"
-to = "/"
+  from = "/*"
+  to = "/"
+  
