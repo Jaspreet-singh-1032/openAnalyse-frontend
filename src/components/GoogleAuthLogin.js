@@ -13,6 +13,7 @@ export default function GoogleAuthLogin() {
         buttonText="LOGIN"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
+        accessType="offline"
       />
     </div>
   );
