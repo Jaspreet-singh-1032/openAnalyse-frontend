@@ -1,13 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
 // material ui imports
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import GitHubIcon from "@mui/icons-material/GitHub";
+
 // components import
 import { GlobalContext } from "../GlobalState";
+import GoogleAuthLogin from "./GoogleAuthLogin";
 import NavMenu from "./NavMenu";
 
 // css import
@@ -34,7 +37,6 @@ function Navbar() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const login = "login";
-  const signup = "signup";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -119,12 +121,7 @@ function Navbar() {
       <div className="navbar__loginContainer">
         {!state.user ? (
           <>
-            <Button onClick={() => openModal({ modalType: login })}>
-              Login
-            </Button>
-            <Button onClick={() => openModal({ modalType: signup })}>
-              Sign up
-            </Button>
+            <GoogleAuthLogin />
           </>
         ) : (
           <>

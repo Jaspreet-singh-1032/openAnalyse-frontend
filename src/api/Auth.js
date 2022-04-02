@@ -23,3 +23,11 @@ export const getUserApi = async () => {
   const response = await get(`${API_BASE_URL}/api/user/`, true);
   return response;
 };
+
+export const googleAuthLoginApi = async (accessToken) => {
+  const response = await post(`${API_BASE_URL}/rest-auth/google/`, {
+    access_token: accessToken,
+  });
+  localStorage.setItem("token", response.data.key);
+  return response;
+};
