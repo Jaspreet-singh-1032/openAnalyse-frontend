@@ -6,7 +6,12 @@ import React, {
 } from "react";
 import PropTypes from "prop-types";
 import reducer from "./reducer";
-import { getUserApi, userLoginApi, userRegisterApi } from "./api/Auth";
+import {
+  getUserApi,
+  userLoginApi,
+  userRegisterApi,
+  googleAuthLoginApi,
+} from "./api/Auth";
 import {
   getActivityTypes,
   postActivityType,
@@ -58,6 +63,19 @@ export const GlobalProvider = ({ children }) => {
       dispatch(setUser(response.data.user));
       dispatch(setMessage(response.data.detail, "success"));
       setOpen && setOpen(false);
+      fetchActivityTypes();
+    } else {
+      dispatch(setMessage(response.data.detail, "error"));
+    }
+    dispatch(stopLoading());
+  };
+
+  const userGoogleLogin = async (accessToken) => {
+    dispatch(startLoading());
+    let response = await googleAuthLoginApi(accessToken);
+    if (response.status === 200) {
+      getUser();
+      dispatch(setMessage("login success", "success"));
       fetchActivityTypes();
     } else {
       dispatch(setMessage(response.data.detail, "error"));
@@ -158,6 +176,7 @@ export const GlobalProvider = ({ children }) => {
         dispatch,
         userLogin,
         userRegister,
+        userGoogleLogin,
         userLogout,
         fetchActivityTypes,
         addActivityType,

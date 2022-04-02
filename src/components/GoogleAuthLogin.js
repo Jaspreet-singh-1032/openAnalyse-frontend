@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import GoogleLogin from "react-google-login";
 
+import { GlobalContext } from "../GlobalState";
+
 export default function GoogleAuthLogin() {
+  const { userGoogleLogin } = useContext(GlobalContext);
   const responseGoogle = (response) => {
-    console.log(response);
+    if (response.accessToken) {
+      // login
+      userGoogleLogin(response.accessToken);
+    }
   };
 
   return (
