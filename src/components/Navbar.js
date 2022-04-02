@@ -37,7 +37,6 @@ function Navbar() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const login = "login";
-  const signup = "signup";
 
   const handleSubmit = (e) => {
     e.preventDefault();
