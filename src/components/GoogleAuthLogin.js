@@ -9,6 +9,8 @@ export default function GoogleAuthLogin() {
     if (response.accessToken) {
       // login
       userGoogleLogin(response.accessToken);
+    } else {
+      console.log(response);
     }
   };
 
