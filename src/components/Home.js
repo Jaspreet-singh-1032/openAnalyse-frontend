@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import chartExample from "../static/chart-example.png";
+import activityLogsImage from "../static/activity-logs-2.png";
 
 import "./Home.css";
 
@@ -16,8 +17,8 @@ function Home() {
         <div className="home__mainText">
           <h1>Keep learning! Keep Growing!</h1>
           <h2>
-            openAnalyse is an Free and open-source application that helps users
-            to analyse how they are investing their time.
+            openAnalyse is an open-source application that helps users to
+            analyse how they are investing their time.
           </h2>
           {state.user && (
             <div className="home__goToAppButton">
@@ -29,7 +30,14 @@ function Home() {
         </div>
         <div className="home__chartExampleConatiner">
           <h3>See chart visualizations of how did you spent your time.</h3>
-          <img className="chartImg" src={chartExample} alt="img" />
+          <img className="chartImg" src={chartExample} alt="analyse-chart" />
+        </div>
+        <div className="home__activityLogsImageContainer">
+          <img
+            className="chartImg"
+            src={activityLogsImage}
+            alt="activity-logs"
+          />
         </div>
         <div className="home__description">
           <h1>Why this app ?</h1>
