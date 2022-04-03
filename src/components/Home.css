@@ -54,3 +54,10 @@
 .home__goToAppButton {
   padding-top: 20px;
 }
+
+.home__activityLogsImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}

@@ -22,7 +22,7 @@ function Footer() {
           Linkedin
         </a>
         <br />
-        <a href="mailto:jassimehra2612@gmail.com">jassimehra2612@gmail.com</a>
+        <a href="mailto:jassimehra2612@gmail.com">Gmail</a>
       </div>
       <div className="footer__main">Guthub links:-</div>
       <div className="footer__linksContainer">
