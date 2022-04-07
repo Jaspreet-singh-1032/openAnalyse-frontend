@@ -139,9 +139,9 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getActivities = useCallback(
-    async (created_gte = "", created_lte = "") => {
+    async (created_gte = "", created_lte = "", params = {}) => {
       dispatch(startLoading());
-      let response = await getActivitiesApi(created_gte, created_lte);
+      let response = await getActivitiesApi(created_gte, created_lte, params);
       dispatch(stopLoading());
       if (response.status === 200) {
         return response.data;
