@@ -29,7 +29,6 @@ export const post = async (url, data = {}, authenticate = false) => {
 export const get = async (url, authenticate = false) => {
   /*
   url : api url to call
-  data : data in request body
   authenticate : whether to add auth token in api call or not
   */
   let headers = {
