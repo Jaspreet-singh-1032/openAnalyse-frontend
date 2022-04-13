@@ -4,23 +4,41 @@ import ActivityCalendar from "react-activity-calendar";
 import ReactTooltip from "react-tooltip";
 import "./ActivitiesCalendar.css";
 
+import { secondsToTimeStamp } from "../utils";
+
+const getLevel = (time_spent) => {
+  switch (true) {
+    case time_spent <= 3600:
+      return 1;
+    case time_spent <= 3600 * 2:
+      return 2;
+    case time_spent <= 3600 * 3:
+      return 3;
+    default:
+      return 4;
+  }
+};
+
 export default function ActivitiesCalendar() {
-  const { getActivities, state } = useContext(GlobalContext);
+  const { getTimeSpentEachDay, state } = useContext(GlobalContext);
   const [activities, setActivities] = useState([]);
+  const [totalTimeSpent, setTotalTimeSpent] = useState(0); // in seconds
 
   useEffect(async () => {
-    const response = await getActivities("", "", { ordering: "created" });
+    const response = await getTimeSpentEachDay();
+    setTotalTimeSpent(() =>
+      response.reduce((sum, day) => sum + day.total_time_spent, 0)
+    );
     setActivities(() => {
-      return response.map((activity) => {
-        let date = new Date(activity.created);
+      return response.map((day) => {
         return {
-          count: parseInt(activity.time_spent / 60 / 60),
-          date: date.toISOString().split("T")[0],
-          level: activity.time_spent / 3600,
+          count: secondsToTimeStamp(day.total_time_spent),
+          date: day.created__date,
+          level: getLevel(day.total_time_spent),
         };
       });
     });
-  }, []);
+  }, [state.refreshGraph]);
 
   return (
     <div className="activitiesCalendar">
@@ -31,7 +49,10 @@ export default function ActivitiesCalendar() {
         blockSize={14}
         blockMargin={5}
         labels={{
-          totalCount: "{{count}} Hours Spent",
+          totalCount: "Total {{total_time_spent}} Spent".replace(
+            "{{total_time_spent}}",
+            secondsToTimeStamp(totalTimeSpent)
+          ),
         }}
         showWeekdayLabels={true}
       >

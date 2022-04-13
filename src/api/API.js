@@ -60,3 +60,11 @@ export const getActivityTypesFetchActivitiesApi = async (days) => {
   );
   return response;
 };
+
+export const getTimeSpentEachDayApi = async () => {
+  const response = await get(
+    `${API_BASE_URL}/api/activities/time_spent_each_day/`,
+    true
+  );
+  return response;
+};
