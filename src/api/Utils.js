@@ -1,6 +1,6 @@
 export const API_BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://openanalyse.pythonanywhere.com/"
+    ? "https://openanalyse.pythonanywhere.com"
     : "http://localhost:8000";
 
 export const post = async (url, data = {}, authenticate = false) => {
