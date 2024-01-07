@@ -1,0 +1,23 @@
+@media only screen and (min-width: 550px) {
+  /* for large screen */
+  .activitiesCalendar {
+    padding-left: 130px;
+    padding-right: 130px;
+  }
+}
+
+.activitiesCalendar {
+  /* justify-content: center; */
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activitiesCalendar__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 30px;
+}

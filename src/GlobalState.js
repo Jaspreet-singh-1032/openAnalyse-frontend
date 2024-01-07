@@ -18,6 +18,7 @@ import {
   postAddActivity,
   getActivitiesApi,
   getActivityTypesFetchActivitiesApi,
+  getTimeSpentEachDayApi,
 } from "./api/API";
 import {
   setUser,
@@ -139,9 +140,9 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getActivities = useCallback(
-    async (created_gte = "", created_lte = "") => {
+    async (created_gte = "", created_lte = "", params = {}) => {
       dispatch(startLoading());
-      let response = await getActivitiesApi(created_gte, created_lte);
+      let response = await getActivitiesApi(created_gte, created_lte, params);
       dispatch(stopLoading());
       if (response.status === 200) {
         return response.data;
@@ -165,6 +166,13 @@ export const GlobalProvider = ({ children }) => {
     dispatch(setChartFilter(filter));
   };
 
+  const getTimeSpentEachDay = useCallback(async () => {
+    dispatch(startLoading());
+    let response = await getTimeSpentEachDayApi();
+    dispatch(stopLoading());
+    return response.data;
+  }, [state.user]);
+
   useEffect(() => {
     getUser();
   }, []);
@@ -184,6 +192,7 @@ export const GlobalProvider = ({ children }) => {
         getActivities,
         fetchActivityTypeActivities,
         updateChartFilter,
+        getTimeSpentEachDay,
       }}
     >
       {children}

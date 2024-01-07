@@ -28,6 +28,6 @@ function ActivitiesTable({ data }) {
 }
 
 ActivitiesTable.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 export default ActivitiesTable;
